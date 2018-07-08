@@ -1,4 +1,4 @@
-# Logs Analysis 
+# Logs Analysis
 _This project was made specifically for Udacity’s Full Stack Web Developer Nanodegree._
 This project uses python and SQL to analyze the news database, a database supplied to me by Udacity.
 
@@ -13,20 +13,29 @@ This project uses python and SQL to analyze the news database, a database suppli
 SELECT title AS article_title, COUNT(*) AS views
 FROM articles a
 JOIN log l
-ON l.path LIKE concat('%', a.slug) 
+ON l.path LIKE concat('%', a.slug)
 GROUP BY title
 ORDER BY views DESC
 LIMIT 3;`
 7. Create a second view by running the following query:
-`CREATE VIEW author_views AS 
-SELECT authors.name, COUNT(log.path) AS total_views 
-FROM authors 
-JOIN articles 
-ON authors.id = articles.author 
-JOIN log 
-ON log.path LIKE concat('%', articles.slug) 
-GROUP BY authors.name 
+`CREATE VIEW author_views AS
+SELECT authors.name, COUNT(log.path) AS total_views
+FROM authors
+JOIN articles
+ON authors.id = articles.author
+JOIN log
+ON log.path LIKE concat('%', articles.slug)
+GROUP BY authors.name
 ORDER BY COUNT(log.path) DESC;`
 8. Create a final view by running the following query:
-``
-9. Open the terminal app on your mac or the command prompt on your Windows machine and navigate 
+`CREATE VIEW all_requests AS
+SELECT DATE_TRUNC('day', time) AS day, status
+FROM log;`
+9. CREATE VIEW
+`CREATE VIEW failed_requests AS
+SELECT day, COUNT(*) AS number
+FROM all_requests
+WHERE status = '404 NOT FOUND'
+GROUP BY day;`r
+10. ``
+9. Open the terminal app on your mac or the command prompt on your Windows machine and navigate
