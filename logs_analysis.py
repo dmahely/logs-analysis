@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
 import psycopg2
+
 
 # database name declared as a constant
 DBNAME = 'dbname=news'
@@ -10,8 +10,14 @@ output = open('output.txt', 'w')
 
 # takes a query and returns the results
 def get_query_results(query):
-    # connecting to the news database
-    connection = psycopg2.connect(DBNAME)
+    # connecting to the news database, prints error if connection fails
+    try:
+        connection = psycopg2.connect(DBNAME)
+    except psycopg2.Error as e:
+        print e.pgerror
+        print 'Unable to connect'
+    else:
+        print 'Connected'
     # creating a cursor
     cursor = connection.cursor()
     # executing the passed query
@@ -22,6 +28,7 @@ def get_query_results(query):
     connection.close()
     # returning results of query
     return results
+
 
 # PART ONE:  What are the most popular three articles of all time?
 article_views = 'SELECT * FROM article_views;'

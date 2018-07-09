@@ -15,7 +15,7 @@ You must have Python installed on your machine. Check your Python version by run
 7. Navigate to `/vagrant` by running `cd /vagrant`
 8. Run `psql news`
 9. Create a view by running the following query:
-`CREATE VIEW AS
+`CREATE VIEW article_views AS
 SELECT title AS article_title, COUNT(*) AS views
 FROM articles a
 JOIN log l
